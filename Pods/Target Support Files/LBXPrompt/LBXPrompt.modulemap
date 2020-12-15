@@ -1,0 +1,6 @@
+framework module LBXPrompt {
+  umbrella header "LBXPrompt-umbrella.h"
+
+  export *
+  module * { export * }
+}
