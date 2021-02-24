@@ -20,6 +20,12 @@
 
 
 /**
+ 显示等待Hud,需要主动调用 hiddeHudView来隐藏
+ */
++ (void)showNoDelayHudWating;
+
+
+/**
  显示hud及信息，默认延后20s自动消失，也可以调用hiddeHudView 主动隐藏
 
  @param message 信息
@@ -31,7 +37,7 @@
   显示hud及信息
 
  @param message 信息
- @param delaySeconds 延后多少s后自动消失
+ @param delaySeconds 延后多少s后自动消失 <0  表示不延时
  */
 + (void)showHudWatingWithMessage:(NSString*)message delaySeconds:(NSInteger)delaySeconds;
 

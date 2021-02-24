@@ -21,15 +21,18 @@
 }
 
 - (IBAction)btn1:(id)sender {
-    [LBXPrompt showHudWating];
+//    [LBXPrompt showHudWating];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [LBXPrompt showHudWatingWithMessage:@"请稍候" delaySeconds:-1];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         [LBXPrompt hiddeHudView];
         
-        [LBXPrompt showHudWatingWithMessage:@"请稍候" delaySeconds:5];
+//        [LBXPrompt showHudWatingWithMessage:@"请稍候" delaySeconds:5];
 
     });
+    
 }
 - (IBAction)btn2:(id)sender {
     

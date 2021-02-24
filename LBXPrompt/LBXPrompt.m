@@ -83,6 +83,20 @@
     }
 }
 
++ (void)showNoDelayHudWatingWithMessage:(NSString*)message
+{
+    if ([NSThread isMainThread]) {
+        [self showHudWatingWithMessage:message delaySeconds:10000];
+    }
+    else
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // 更新界面
+            [self showHudWatingWithMessage:message delaySeconds:20];
+        });
+    }
+}
+
 + (void)showHudWatingWithMessage:(NSString*)message delaySeconds:(NSInteger)delaySeconds
 {
     if ([NSThread isMainThread]) {
@@ -93,8 +107,9 @@
         
         UIWindow * window = [[UIApplication sharedApplication] keyWindow];
         [LBXProgressHUD showWaitingWithMessage:message onView:window];
-        
-        [[LBXPrompt sharedManager]delayHiddHudView:delaySeconds];
+        if (delaySeconds > 0) {
+            [[LBXPrompt sharedManager]delayHiddHudView:delaySeconds];
+        }
     }
     else
     {
@@ -107,15 +122,21 @@
             UIWindow * window = [[UIApplication sharedApplication] keyWindow];
             [LBXProgressHUD showWaitingWithMessage:message onView:window];
             
-            [[LBXPrompt sharedManager]delayHiddHudView:delaySeconds];
+            if (delaySeconds > 0) {
+                [[LBXPrompt sharedManager]delayHiddHudView:delaySeconds];
+            }
         });
     }
- 
 }
 
 + (void)showHudWating
 {
     [self showHudWatingWithMessage:@""];
+}
+
++ (void)showNoDelayHudWating
+{
+    [self showHudWatingWithMessage:@"" delaySeconds:-1];
 }
 
 + (void)hiddeHudView
